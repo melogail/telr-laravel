@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create('telr_transactions', function (Blueprint $table) {
+            $table->id();
+            $table->text('cart_id')';
+            $table->text('order_id');
+            $table->string('fname');
+            $table->string('sname');
+            $table->string('bill_addr1');
+            $table->string('bill_addr2')->nullable();
+            $table->string('bill_addr3')->nullable();
+            $table->string('bill_phone');
+            $table->string('bill_city');
+            $table->string('bill_region');
+            $table->char('bill_country', 2);
+            $table->string('bill_zip')->nullable();
+            $table->string('email');
+            $table->string('ivp_lang')->nullable();
+            $table->string('ivp_trantype')->nullable();
+            $table->string('ivp_update_url')->nullable();
+            $table->timestamps();
+        });
+    }
+};

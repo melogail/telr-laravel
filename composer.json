@@ -1,24 +1,25 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "melogail/telr-laravel",
+    "description": "Laravel Telr payment gateway solutions package.",
     "keywords": [
-        ":vendor_name",
+        "melogail",
         "laravel",
-        ":package_slug"
+        "telr_laravel"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/melogail/telr-laravel",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Mohamed Elogail",
+            "email": "me@mogail.net",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.1",
-        "spatie/laravel-package-tools": "^1.14.0",
-        "illuminate/contracts": "^10.0"
+        "guzzlehttp/guzzle": "^7.5",
+        "illuminate/contracts": "^10.0",
+        "spatie/laravel-package-tools": "^1.14.0"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
@@ -35,13 +36,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Melogail\\TelrLaravel\\": "src",
+            "Melogail\\TelrLaravel\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Melogail\\TelrLaravel\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -61,10 +62,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Melogail\\TelrLaravel\\TelrLaravelServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "TelrLaravel": "Melogail\\TelLaravel\\Facades\\TelrLaravel"
             }
         }
     },

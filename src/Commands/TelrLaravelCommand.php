@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Melogail\TelrLaravel\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class TelrLaravelCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'telr-laravel';
 
     public $description = 'My command';
 

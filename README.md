@@ -29,7 +29,7 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require :vendor_slug/:package_slug
+composer require melogail/telr-laravel
 ```
 
 You can publish and run the migrations with:
@@ -61,7 +61,7 @@ php artisan vendor:publish --tag=":package_slug-views"
 ## Usage
 
 ```php
-$variable = new VendorName\Skeleton();
+$variable = new Melogail\TelrLaravel();
 echo $variable->echoPhrase('Hello, VendorName!');
 ```
 
