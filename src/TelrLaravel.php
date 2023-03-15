@@ -60,7 +60,7 @@ class TelrLaravel
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function sendPaymentRequest($end_point, $params)
+    public function sendPaymentRequest($end_point, array $params = [])
     {
 
         $client = new Client();
@@ -73,6 +73,18 @@ class TelrLaravel
 
         // Convert JSON response to object
         return json_decode($response->getBody()->getContents());
+
+    }
+
+
+    /**
+     * TODO: This method will prepare the essential parameters for
+     * sending the request to the payment gateway
+     *
+     * @return void
+     */
+    public function prepareParameters()
+    {
 
     }
 
