@@ -122,7 +122,6 @@ class TelrLaravel
     public function pay(array $params = [])
     {
         // Prepare parameters
-        $this->setIvpMethod('create');
 
         $parameters = [
             'ivp_method' => $this->getIvpMethod(),
@@ -136,9 +135,35 @@ class TelrLaravel
         $response = Http::post($this->endpointLink, $params);
 
         // TODO::Change the status to success
-        $this->paymentStatus($response);
+        //$this->paymentStatus($response);
 
         return redirect(config('telr-laravel.response_path.return_auth'))->with($response->headers());
+    }
+
+
+    /**
+     * For checking for transaction details
+     *
+     * @return $this
+     */
+    public function checkPayment()
+    {
+        $this->setIvpMethod('check');
+
+        return $this;
+    }
+
+
+    /**
+     * For making payment
+     *
+     * @return $this
+     */
+    public function makePayment()
+    {
+        $this->setIvpMethod('create');
+
+        return $this;
     }
 
 
