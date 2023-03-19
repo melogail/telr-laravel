@@ -22,4 +22,17 @@ class TelrLaravelServiceProvider extends PackageServiceProvider
             ->hasMigration('create_telr_transactions_table')
             ->hasCommand(TelrLaravelCommand::class);
     }
+
+    public function boot()
+    {
+
+        if ($this->app->runningInConsole()) {
+            $this->publishes(
+                [
+                    __DIR__ . '../config/telr-laravel.php' => config_path('telr-laravel.php')
+                ], 'config'
+            );
+        }
+
+    }
 }
