@@ -122,6 +122,7 @@ class TelrLaravel
     public function pay(array $params = [])
     {
         // Prepare parameters
+        $this->setIvpMethod('create');
 
         $parameters = [
             'ivp_method' => $this->getIvpMethod(),
