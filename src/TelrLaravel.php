@@ -13,6 +13,7 @@ use Ramsey\Uuid\Uuid;
 class TelrLaravel
 {
 
+    public string $version = '0.1';
 
     /**
      * The payment amount.
