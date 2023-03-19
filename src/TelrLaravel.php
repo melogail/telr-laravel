@@ -134,6 +134,7 @@ class TelrLaravel
             'ivp_store' => config('telr-laravel.ess_params.ivp_store'),
             'ivp_authkey' => config('telr-laravel.ess_params.ivp_authkey'),
             'ivp_test' => config('telr-laravel.telr_test_mode'),
+            'ivp_amount' => $this->amount,
             'ivp_currency' => config('telr-laravel.telr_currency'),
             'return_auth' => config('telr-laravel.response_path.return_auth'),
         ];
