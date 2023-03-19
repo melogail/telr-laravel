@@ -132,11 +132,11 @@ class TelrLaravel
         ];
 
         // Send request and receive response
-        Http::post($this->endpointLink, $parameters);
+        $response = Http::post($this->endpointLink, $parameters);
 
         // TODO::Change the status to success
         //$this->paymentStatus($response);
-
+        return $response;
         //return redirect(config('telr-laravel.response_path.return_auth'))->with($response->headers());
     }
 
