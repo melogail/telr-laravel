@@ -5,7 +5,7 @@ namespace Melogail\TelrLaravel;
 class Transaction extends \Illuminate\Database\Eloquent\Model
 {
 
-    protected $table = 'transactions';
+    protected $table = 'telr_transactions';
 
     protected $fillable = [
         'card_id',

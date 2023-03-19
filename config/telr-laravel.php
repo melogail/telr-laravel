@@ -30,22 +30,6 @@ return [
 
     /*
      |--------------------------------------------------
-     | Telr Endpoint Link
-     |--------------------------------------------------
-     | Set the sales endpoint link that will accept the
-     | parameters that will be sent to the payment
-     | gateway. For more information see the part
-     | "Request method and format" on the link
-     |
-     | https://telr.com/support/knowledge-base/hosted-payment-page-integration-guide/
-     |
-     */
-
-    'endpoint'       => 'https://secure.telr.com/gateway/order.json',
-
-
-    /*
-     |--------------------------------------------------
      | Essential Parameters
      |--------------------------------------------------
      | The essential parameters needed to send data
@@ -54,7 +38,6 @@ return [
      */
 
     'ess_params' => [
-        'ivp_method'  => 'create',
         'ivp_store'   => env('TELR_STORE_ID'),
         'ivp_authkey' => env('TELR_AUTH_KEY'),
 

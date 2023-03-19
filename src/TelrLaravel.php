@@ -3,39 +3,69 @@
 namespace Melogail\TelrLaravel;
 
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
+use http\Client;
+use Illuminate\Http\Client\RequestException;
+use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 
 class TelrLaravel
 {
+
+
     /**
-     * The payment amount
+     * The payment amount.
      *
      * @var float
      */
     private $amount = 0.0;
 
-    /**
-     * Cart ID set by the payment gateway
-     *
-     * @var
-     */
-    private $cart_id;
 
     /**
-     * Order ID set by the system
+     * Cart ID set by the payment gateway.
      *
-     * @var
+     * @var string
      */
-    private $order_id;
+    private string $cart_id;
+
 
     /**
-     * Billing Parameters
+     * Order ID set by system.
+     *
+     * @var string
+     */
+    private string $order_id;
+
+
+    /**
+     * Billing Parameters.
      *
      * @var array
      */
     private array $billing_params = [];
+
+
+    /**
+     * Set the sales endpoint link that will accept the
+     * parameters that will be sent to the payment
+     * gateway. For more information see the part
+     * "Request method and format" on the link
+     *
+     * https://telr.com/support/knowledge-base/hosted-payment-page-integration-guide/
+     *
+     * @var string
+     */
+    private string $endpointLink = 'https://secure.telr.com/gateway/order.json';
+
+
+    /**
+     * Method sent to "create" or "check" order.
+     *
+     * @var string
+     */
+    private string $ivp_method;
+
 
     /**
      * Create constructor
@@ -52,40 +82,62 @@ class TelrLaravel
 
 
     /**
-     * Send post request to the payment endpoint with payment
-     * parameters.
+     * Set ivp_method type for request
      *
-     * @param $end_point
-     * @param $params
-     * @return mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @param string $ivp_method
+     * @return $this
      */
-    public function sendPaymentRequest($end_point, array $params = [])
+    public function setIvpMethod(string $ivp_method)
     {
+        $this->ivp_method = $ivp_method;
 
-        $client = new Client();
-        $response = $client->post($end_point, $params);
-
-        // Validate if the response has no errors and return 200.
-        if (200 != $response->getStatusCode()) {
-            throw new ClientException('The response is ' . $response->getStatusCode());
-        }
-
-        // Convert JSON response to object
-        return json_decode($response->getBody()->getContents());
-
+        return $this;
     }
 
 
     /**
-     * TODO: This method will prepare the essential parameters for
-     * sending the request to the payment gateway
+     * Get ivp_method
      *
-     * @return void
+     * @return string
      */
-    public function prepareParameters()
+    public function getIvpMethod()
     {
-
+        return $this->ivp_method;
     }
+
+
+    /**
+     * @throws RequestException
+     */
+    public function paymentStatus(Response $response)
+    {
+        if ($response->successful()) {
+            dd('Request sent successfully!');
+        }
+
+        dd($response->throw());
+    }
+
+    public function pay(array $params = [])
+    {
+        // Prepare parameters
+
+        $parameters = [
+            'ivp_method' => $this->getIvpMethod(),
+            'ivp_store' => config('telr-laravel.ess_params.ivp_store'),
+            'ivp_authkey' => config('telr-laravel.ess_params.ivp_authkey'),
+            'ivp_currency' => config('telr-laravel.telr_currency'),
+            'return_auth' => config('telr-laravel.response_path.return_auth'),
+        ];
+
+        // Send request and receive response
+        $response = Http::post($this->endpointLink, $params);
+
+        // TODO::Change the status to success
+        $this->paymentStatus($response);
+
+        return redirect(config('telr-laravel.response_path.return_auth'))->with($response->headers());
+    }
+
 
 }
