@@ -137,7 +137,7 @@ class TelrLaravel
         // TODO::Change the status to success
         //$this->paymentStatus($response);
 
-        return redirect(config('telr-laravel.response_path.return_auth'))->with($response->headers());
+        //return redirect(config('telr-laravel.response_path.return_auth'))->with($response->headers());
     }
 
 
