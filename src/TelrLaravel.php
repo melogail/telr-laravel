@@ -132,7 +132,7 @@ class TelrLaravel
         ];
 
         // Send request and receive response
-        $response = Http::post($this->endpointLink, $params);
+        Http::post($this->endpointLink, $parameters);
 
         // TODO::Change the status to success
         //$this->paymentStatus($response);
