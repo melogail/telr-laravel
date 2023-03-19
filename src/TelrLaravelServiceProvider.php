@@ -29,7 +29,7 @@ class TelrLaravelServiceProvider extends PackageServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes(
                 [
-                    __DIR__ . '../config/telr-laravel.php' => config_path('telr-laravel.php')
+                    __DIR__ . '/../config/telr-laravel.php' => config_path('telr-laravel.php')
                 ], 'config'
             );
         }
