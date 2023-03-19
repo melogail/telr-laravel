@@ -119,20 +119,33 @@ class TelrLaravel
         dd($response->throw());
     }
 
+
+    /**
+     * Perform the payment
+     *
+     * @param array $params
+     * @return \GuzzleHttp\Promise\PromiseInterface|Response
+     */
     public function pay(array $params = [])
     {
-        // Prepare parameters
-
+        // Essential parameters
         $parameters = [
             'ivp_method' => $this->getIvpMethod(),
             'ivp_store' => config('telr-laravel.ess_params.ivp_store'),
             'ivp_authkey' => config('telr-laravel.ess_params.ivp_authkey'),
+            'ivp_test' => config('telr-laravel.telr_test_mode'),
             'ivp_currency' => config('telr-laravel.telr_currency'),
             'return_auth' => config('telr-laravel.response_path.return_auth'),
         ];
 
+        // Merge user parameters
+        if (!empty($params)) {
+            $parameters = array_merge($parameters, $params);
+        }
+
         // Send request and receive response
-        $response = Http::post($this->endpointLink, $parameters);
+        $response = Http::asForm()->post($this->endpointLink, $parameters);
+
 
         // TODO::Change the status to success
         //$this->paymentStatus($response);
@@ -159,9 +172,10 @@ class TelrLaravel
      *
      * @return $this
      */
-    public function makePayment()
+    public function makePayment($amount)
     {
         $this->setIvpMethod('create');
+        $this->amount = $amount;
 
         return $this;
     }
