@@ -33,6 +33,5 @@ class TelrLaravelServiceProvider extends PackageServiceProvider
                 ], 'config'
             );
         }
-
     }
 }

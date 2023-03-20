@@ -3,6 +3,7 @@
 namespace Melogail\TelrLaravel;
 
 
+use GuzzleHttp\Promise\PromiseInterface;
 use http\Client;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Client\Response;
@@ -40,6 +41,14 @@ class TelrLaravel
 
 
     /**
+     * Order description
+     *
+     * @var string
+     */
+    private string $order_description;
+
+
+    /**
      * Billing Parameters.
      *
      * @var array
@@ -74,11 +83,13 @@ class TelrLaravel
      * @param $order_id
      * @param $amount
      */
-    public function __construct($order_id, $amount)
+    public function __construct($order_id, $amount, $order_description)
     {
         $this->order_id = $order_id;
         $this->amount = $amount;
+        $this->order_description = $order_description;
         $this->cart_id = Uuid::uuid4()->toString() . '-' . time();
+
     }
 
 
@@ -124,7 +135,7 @@ class TelrLaravel
      * Perform the payment
      *
      * @param array $params
-     * @return \GuzzleHttp\Promise\PromiseInterface|Response
+     * @return PromiseInterface|Response
      */
     public function pay(array $params = [])
     {
@@ -135,6 +146,7 @@ class TelrLaravel
             'ivp_authkey' => config('telr-laravel.ess_params.ivp_authkey'),
             'ivp_test' => config('telr-laravel.telr_test_mode'),
             'ivp_amount' => $this->amount,
+            'ivp_desc' => $this->order_description,
             'ivp_currency' => config('telr-laravel.telr_currency'),
             'return_auth' => config('telr-laravel.response_path.return_auth'),
         ];
@@ -146,7 +158,6 @@ class TelrLaravel
 
         // Send request and receive response
         $response = Http::asForm()->post($this->endpointLink, $parameters);
-
 
         // TODO::Change the status to success
         //$this->paymentStatus($response);
@@ -173,10 +184,9 @@ class TelrLaravel
      *
      * @return $this
      */
-    public function makePayment($amount)
+    public function makePayment()
     {
         $this->setIvpMethod('create');
-        $this->amount = $amount;
 
         return $this;
     }
