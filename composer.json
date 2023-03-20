@@ -1,6 +1,6 @@
 {
     "name": "melogail/telr-laravel",
-    "version": "master",
+    "version": "1.0.0",
     "description": "Laravel Telr payment gateway solutions package.",
     "keywords": [
         "melogail",
