@@ -3,7 +3,7 @@
 namespace Melogail\TelrLaravel\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \Illuminate\Routing\Controller;
+use Illuminate\Routing\Controller;
 
 class TelrController extends Controller
 {
@@ -15,8 +15,5 @@ class TelrController extends Controller
     public function onSuccess(Request $request)
     {
         // Fire the save event
-
     }
-
-
 }

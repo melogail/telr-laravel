@@ -2,18 +2,15 @@
 
 namespace Melogail\TelrLaravel;
 
-
 use GuzzleHttp\Promise\PromiseInterface;
-use http\Client;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Client\Response;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Ramsey\Uuid\Uuid;
 
 class TelrLaravel
 {
-
     public string $version = '1.0.0';
 
     /**
@@ -23,38 +20,25 @@ class TelrLaravel
      */
     private $amount = 0.0;
 
-
     /**
      * Cart ID set by the payment gateway.
-     *
-     * @var string
      */
     private string $cart_id;
 
-
     /**
      * Order ID set by system.
-     *
-     * @var string
      */
     private string $order_id;
 
-
     /**
      * Order description
-     *
-     * @var string
      */
     private string $order_description;
 
-
     /**
      * Billing Parameters.
-     *
-     * @var array
      */
     private array $billing_params = [];
-
 
     /**
      * Set the sales endpoint link that will accept the
@@ -63,40 +47,28 @@ class TelrLaravel
      * "Request method and format" on the link
      *
      * https://telr.com/support/knowledge-base/hosted-payment-page-integration-guide/
-     *
-     * @var string
      */
     private string $endpointLink = 'https://secure.telr.com/gateway/order.json';
 
-
     /**
      * Method sent to "create" or "check" order.
-     *
-     * @var string
      */
     private string $ivp_method;
 
-
     /**
      * Create constructor
-     *
-     * @param $order_id
-     * @param $amount
      */
     public function __construct($order_id, $amount, $order_description)
     {
         $this->order_id = $order_id;
         $this->amount = $amount;
         $this->order_description = $order_description;
-        $this->cart_id = Uuid::uuid4()->toString() . '-' . time();
-
+        $this->cart_id = Uuid::uuid4()->toString().'-'.time();
     }
-
 
     /**
      * Set ivp_method type for request
      *
-     * @param string $ivp_method
      * @return $this
      */
     public function setIvpMethod(string $ivp_method)
@@ -105,7 +77,6 @@ class TelrLaravel
 
         return $this;
     }
-
 
     /**
      * Get ivp_method
@@ -116,7 +87,6 @@ class TelrLaravel
     {
         return $this->ivp_method;
     }
-
 
     /**
      * @throws RequestException
@@ -130,11 +100,9 @@ class TelrLaravel
         dd($response->throw());
     }
 
-
     /**
      * Perform the payment
      *
-     * @param array $params
      * @return PromiseInterface|Response
      */
     public function pay(array $params = [])
@@ -153,7 +121,7 @@ class TelrLaravel
         ];
 
         // Merge user parameters
-        if (!empty($params)) {
+        if (! empty($params)) {
             $parameters = array_merge($parameters, $params);
         }
 
@@ -165,7 +133,6 @@ class TelrLaravel
         return $response;
         //return redirect(config('telr-laravel.response_path.return_auth'))->with($response->headers());
     }
-
 
     /**
      * For checking for transaction details
@@ -179,7 +146,6 @@ class TelrLaravel
         return $this;
     }
 
-
     /**
      * For making payment
      *
@@ -191,6 +157,4 @@ class TelrLaravel
 
         return $this;
     }
-
-
 }

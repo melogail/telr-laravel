@@ -2,9 +2,9 @@
 
 namespace Melogail\TelrLaravel;
 
+use Melogail\TelrLaravel\Commands\TelrLaravelCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Melogail\TelrLaravel\Commands\TelrLaravelCommand;
 
 class TelrLaravelServiceProvider extends PackageServiceProvider
 {
@@ -25,11 +25,10 @@ class TelrLaravelServiceProvider extends PackageServiceProvider
 
     public function boot()
     {
-
         if ($this->app->runningInConsole()) {
             $this->publishes(
                 [
-                    __DIR__ . '/../config/telr-laravel.php' => config_path('telr-laravel.php')
+                    __DIR__.'/../config/telr-laravel.php' => config_path('telr-laravel.php'),
                 ], 'config'
             );
         }

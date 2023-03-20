@@ -14,7 +14,6 @@ return [
 
     'telr_test_mode' => env('TELR_TEST_MODE'),
 
-
     /*
      |--------------------------------------------------
      | Currency Used
@@ -25,8 +24,7 @@ return [
      |
      */
 
-    'telr_currency'  => env('TELR_CURRENCY'),
-
+    'telr_currency' => env('TELR_CURRENCY'),
 
     /*
      |--------------------------------------------------
@@ -38,11 +36,10 @@ return [
      */
 
     'ess_params' => [
-        'ivp_store'   => env('TELR_STORE_ID'),
+        'ivp_store' => env('TELR_STORE_ID'),
         'ivp_authkey' => env('TELR_AUTH_KEY'),
 
     ],
-
 
     /*
      |--------------------------------------------------
@@ -60,8 +57,8 @@ return [
     'response_path' => [
         'return_auth' => '/payment/success',
         'return_decl' => '/payment/declined',
-        'return_can'  => '/payment/canceled'
+        'return_can' => '/payment/canceled',
 
-    ]
+    ],
 
 ];

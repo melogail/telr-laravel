@@ -4,7 +4,6 @@ namespace Melogail\TelrLaravel;
 
 class Transaction extends \Illuminate\Database\Eloquent\Model
 {
-
     protected $table = 'telr_transactions';
 
     protected $fillable = [
@@ -26,7 +25,6 @@ class Transaction extends \Illuminate\Database\Eloquent\Model
         'ivp_update_url',
         'txr_reference',
         'status',
-        'response'
+        'response',
     ];
-
 }
