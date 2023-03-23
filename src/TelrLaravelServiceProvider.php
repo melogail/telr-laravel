@@ -23,6 +23,18 @@ class TelrLaravelServiceProvider extends PackageServiceProvider
             ->hasCommand(TelrLaravelCommand::class);
     }
 
+
+    public function register()
+    {
+        $this->app->singleton(TelrLaravel::class, function(){
+            return new TelrLaravel();
+        });
+
+        $this->app->bind('telr', function(){
+            return new TelrLaravel;
+        });
+    }
+
     public function boot()
     {
         // Publishing config file
@@ -37,7 +49,7 @@ class TelrLaravelServiceProvider extends PackageServiceProvider
             // Exporting migration files
             $this->publishes(
                 [
-                    __DIR__ . '/../database/migrations/create_telr_transactions_table.php.stub' => database_path('migrations/' . date('Y_m_dHis', time()). 'create_telr_transactions_table'),
+                    __DIR__ . '/../database/migrations/create_telr_transactions_table.php.stub' => database_path('migrations/' . date('Y_m_dHis', time()). '_create_telr_transactions_table.php'),
                     // Add more migrations here.
                 ], 'migrations'
             );

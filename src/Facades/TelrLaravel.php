@@ -11,6 +11,6 @@ class TelrLaravel extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Melogail\TelrLaravel\TelrLaravel::class;
+        return 'telr';
     }
 }

@@ -2,15 +2,28 @@
 
 namespace Melogail\TelrLaravel;
 
-class Transaction extends \Illuminate\Database\Eloquent\Model
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class TelrTransaction extends Model
 {
+
+    /**
+     * Targeted
+     *
+     * @var string
+     */
     protected $table = 'telr_transactions';
 
     protected $fillable = [
-        'card_id',
+        'cart_id',
         'order_id',
+        'reference_code',
+        'amount',
         'fname',
         'sname',
+        'test_mode',
+        'description',
         'bill_addr1',
         'bill_addr2',
         'bill_addr3',
@@ -24,7 +37,11 @@ class Transaction extends \Illuminate\Database\Eloquent\Model
         'ivp_trantype',
         'ivp_update_url',
         'txr_reference',
-        'status',
+        'status_code',
+        'status_text',
         'response',
     ];
+
+
+
 }

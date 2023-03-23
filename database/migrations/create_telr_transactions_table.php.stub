@@ -10,11 +10,12 @@ return new class extends Migration
     {
         Schema::create('telr_transactions', function (Blueprint $table) {
             $table->id();
-            $table->text('cart_id')';
+            $table->text('cart_id');
             $table->text('order_id');
+            $table->text('reference_code');
             $table->float('amount');
             $table->tinyInteger('test_mode');
-            $table->text('description')
+            $table->text('description');
             $table->string('fname');
             $table->string('sname');
             $table->string('bill_addr1');
@@ -29,8 +30,9 @@ return new class extends Migration
             $table->string('ivp_lang')->nullable();
             $table->string('ivp_trantype')->nullable();
             $table->string('ivp_update_url')->nullable();
-            $table->string('trx_reference)'->nullable();
-            $table->enum('status', ['success', 'declined', 'canceled'])
+            $table->string('trx_reference')->nullable();
+            $table->string('status_code')->nullable()->default(1);
+            $table->string('status_text')->nullable()->default('pending');
             $table->text('response')->nullable();
             $table->timestamps();
         });
