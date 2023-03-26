@@ -501,6 +501,13 @@ trait TelrControls
     }
 
 
+    /**
+     * Update transaction status based on cart-id
+     *
+     * @param $ref_code
+     * @param $result
+     * @return void
+     */
     public function updateTransactionStatus($ref_code, $result)
     {
 

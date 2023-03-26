@@ -235,7 +235,7 @@ class TelrLaravel
      *
      * @return true
      */
-    public function onSuccess(Request $request)
+    public function setTransactionStatus(Request $request)
     {
 
         // Get cart ID from URL query

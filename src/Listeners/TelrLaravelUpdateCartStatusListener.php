@@ -20,7 +20,7 @@ class TelrLaravelUpdateCartStatusListener
 
     public function handle(TelrLaravelUpdateCartStatusEvent $event)
     {
-
+        // Update the transaction status
         $event->telr->updateTransactionStatus($event->ref_code, $event->result);
 
     }
