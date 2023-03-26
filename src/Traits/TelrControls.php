@@ -4,6 +4,8 @@ namespace Melogail\TelrLaravel\Traits;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use http\Client;
+use Illuminate\Config\Repository;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
@@ -190,7 +192,7 @@ trait TelrControls
 
 
     /**
-     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|mixed|string
+     * @return Repository|Application|\Illuminate\Foundation\Application|mixed|string
      */
     public function getAuthkey()
     {
@@ -209,7 +211,7 @@ trait TelrControls
     }
 
     /**
-     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|int|mixed
+     * @return Repository|Application|\Illuminate\Foundation\Application|int|mixed
      */
     public function getTestMode()
     {
@@ -290,7 +292,7 @@ trait TelrControls
 
 
     /**
-     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|mixed|string
+     * @return Repository|Application|\Illuminate\Foundation\Application|mixed|string
      */
     public function getCurrency()
     {
@@ -310,7 +312,7 @@ trait TelrControls
 
 
     /**
-     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|mixed|string
+     * @return Repository|Application|\Illuminate\Foundation\Application|mixed|string
      */
     public function getReturnAuth()
     {
@@ -330,7 +332,7 @@ trait TelrControls
 
 
     /**
-     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|mixed|string
+     * @return Repository|Application|\Illuminate\Foundation\Application|mixed|string
      */
     public function getReturnDecl()
     {
@@ -350,7 +352,7 @@ trait TelrControls
 
 
     /**
-     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|mixed|string
+     * @return Repository|Application|\Illuminate\Foundation\Application|mixed|string
      */
     public function getReturnCan()
     {
@@ -390,6 +392,310 @@ trait TelrControls
         return $this->order_id;
     }
 
+
+    /**
+     * @param $bill_title
+     * @return $this
+     */
+    public function setBillTitle($bill_title)
+    {
+        $this->bill_title = $bill_title;
+
+        return $this;
+    }
+
+
+    /**
+     * @param $bill_title
+     * @return string
+     */
+    public function getBillTitle($bill_title)
+    {
+        return $this->bill_title;
+    }
+
+
+    /**
+     * @param $bill_fname
+     * @return $this
+     */
+    public function setBillFname($bill_fname)
+    {
+        $this->bill_fname = $bill_fname;
+
+        return $this;
+    }
+
+
+    /**
+     * @param $bill_fname
+     * @return string
+     */
+    public function getBillFname()
+    {
+        return $this->bill_fname;
+    }
+
+
+    /**
+     * @param $bill_sname
+     * @return $this
+     */
+    public function setBillSname($bill_sname)
+    {
+        $this->bill_sname = $bill_sname;
+
+        return $this;
+    }
+
+
+    /**
+     * @param $bill_sname
+     * @return string
+     */
+    public function getBillSname()
+    {
+        return $this->bill_sname;
+    }
+
+
+    /**
+     * @param $bill_add1
+     * @return $this
+     */
+    public function setBillAddr1($bill_add1)
+    {
+        $this->bill_addr1 = $bill_add1;
+
+        return $this;
+
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getBillAddr1()
+    {
+        return $this->bill_addr1;
+    }
+
+
+    /**
+     * @param $bill_addr2
+     * @return $this
+     */
+    public function setBillAddr2($bill_addr2)
+    {
+        $this->bill_addr2 = $bill_addr2;
+
+        return $this;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getBillAddr2()
+    {
+        return $this->bill_addr2;
+    }
+
+
+    /**
+     * @param $bill_addr3
+     * @return $this
+     */
+    public function setBillAddr3($bill_addr3)
+    {
+        $this->bill_addr3 = $bill_addr3;
+
+        return $this;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getBillAddr3()
+    {
+        return $this->bill_addr3;
+    }
+
+
+    /**
+     * @param $bill_phone
+     * @return $this
+     */
+    public function setBillPhone($bill_phone)
+    {
+        $this->bill_phone = $bill_phone;
+
+        return $this;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getBillPhone()
+    {
+        return $this->bill_phone;
+    }
+
+
+    /**
+     * @param $bill_city
+     * @return $this
+     */
+    public function setBillCity($bill_city)
+    {
+        $this->bill_city = $bill_city;
+
+        return $this;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getBillCity()
+    {
+        return $this->bill_city;
+    }
+
+    /**
+     * Set $bill_region
+     */
+
+    public function setBillRegion($bill_region){
+        $this->bill_region = $bill_region;
+
+        return $this;
+    }
+
+
+    /**
+     * Get $bill_region
+     */
+     public function getBillRegion(){
+        return $this->bill_region;
+     }
+
+
+     /**
+      * Set $bill_country
+      */
+
+     public function setBillCountry($bill_country){
+         $this->bill_country = $bill_country;
+
+         return $this;
+     }
+
+
+     /**
+      * Get $bill_country
+      */
+      public function getBillCountry(){
+         return $this->bill_country;
+      }
+
+
+      /**
+       * Set $bill_zip
+       */
+
+      public function setBillZip($bill_zip){
+          $this->bill_zip = $bill_zip;
+
+          return $this;
+      }
+
+
+      /**
+       * Get $bill_zip
+       */
+       public function getBillZip(){
+          return $this->bill_zip;
+       }
+
+
+       /**
+        * Set $email
+        */
+
+       public function setEmail($email){
+           $this->email = $email;
+
+           return $this;
+       }
+
+
+       /**
+        * Get $email
+        */
+        public function getEmail(){
+           return $this->email;
+        }
+
+
+        /**
+         * Set $vip_lang
+         */
+
+        public function setVipLang($vip_lang){
+            $this->vip_lang = $vip_lang;
+
+            return $this;
+        }
+
+
+        /**
+         * Get $vip_lang
+         */
+         public function getVipLang(){
+            return $this->vip_lang;
+         }
+
+
+
+         /**
+          * Set $vip_trantype
+          */
+
+         public function setVipTranType($vip_trantype){
+             $this->vip_trantype = $vip_trantype;
+
+             return $this;
+         }
+
+
+         /**
+          * Get $vip_trantype
+          */
+          public function getVipTranType(){
+             return $this->vip_trantype;
+          }
+
+
+          /**
+           * Set $vip_update_url
+           */
+
+          public function setVipUpdateUrl($vip_update_url){
+              $this->vip_update_url = $vip_update_url;
+
+              return $this;
+          }
+
+
+          /**
+           * Get $vip_update_url
+           */
+           public function getVipUpdateUrl(){
+              return $this->vip_update_url;
+           }
 
     /**
      * Bootstrap essential params
@@ -519,6 +825,34 @@ trait TelrControls
                 'status_text' => $result->order->status->text
             ]
         );
+
+    }
+
+
+    /**
+     * Check for essential billing parameters
+     *
+     * @param array $parameters
+     * @return void
+     * @throws \Exception
+     */
+    public function checkForUserRequiredParameters(array $parameters)
+    {
+        $required_parameters = [
+            'fname',
+            'sname',
+            'bill_addr1',
+            'bill_phone',
+            'bill_city',
+            'bill_country',
+            'email'
+        ];
+
+        foreach ($required_parameters as $parameter) {
+            if (!array_key_exists($parameter, $parameters)) {
+                throw new \Exception('[Error]: "' . $parameter . '" is required for your billing parameters.');
+            }
+        }
 
     }
 

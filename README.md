@@ -1,28 +1,10 @@
 # :package_description
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/melogail/telr-laravel.svg?style=flat-square)](https://packagist.org/packages/melogail/telr-laravel)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-<!--delete-->
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/melogail/telr-laravel/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/melogail/telr-laravel/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/melogail/telr-laravel.svg?style=flat-square)](https://packagist.org/packages/melogail/telr-laravel)
 
-1. Press the "Use this template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files.
-3. Have fun creating your package.
-4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-<!--/delete-->
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/:package_name.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/:package_name)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+Laravel package to make online payments from your website via ["Telr"](https://telr.com/) payment gateway.
 
 ## Installation
 
@@ -35,58 +17,167 @@ composer require melogail/telr-laravel
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --provider="Melogail\TelrLaravel\TelrLaravelServiceProvider"--tag=":package_slug-migrations"
+php artisan vendor:publish --provider="Melogail\TelrLaravel\TelrLaravelServiceProvider" --tag="migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-config"
+php artisan vendor:publish --provider="Melogail\TelrLaravel\TelrLaravelServiceProvider" --tag="config"
 ```
+This will add the <code>config/telr-laravel.php</code> config file inside your project config folder.
 
-This is the contents of the published config file:
+Inside the <code>config/telr-laravel.php</code> config file you will need to add the relative path to success, decline, and cancel page
+according to your project route.
 
 ```php
 return [
+
+    // ...other configs
+
+    'response_path' => [
+        'return_auth' => '/:path/to_success_page',
+        'return_decl' => '/:path/to_decline_page',
+        'return_can' => '/:path/to_cancel_page',
+    ],
 ];
 ```
 
-Optionally, you can publish the views using
+Add the following code to your <code>.env</code> file and change the values to your payment values.
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-views"
+TELR_STORE_ID=      # Payment API key [its different from your "Service API" key].
+TELR_AUTH_KEY=      # Payment API key.
+TELR_TEST_MODE=     # 1=Test mode | 0=Live mode.
+TELR_CURRENCY=      # Currency used for payment.
+```
+
+Add <code>TelrLaravel</code> facade inside your <code>config/app.php</code> file.
+```php
+'aliases' => Facade::defaultAliases()->merge([
+        // 'ExampleClass' => App\Example\ExampleClass::class,
+        'TelrLaravel' => \Melogail\TelrLaravel\Facades\TelrLaravel::class,
+
+    ])->toArray(),
 ```
 
 ## Usage
+To make payment you need to invoke the <code>TelrLaravel</code> class in your controller.
+```php
+use Melogail\TelrLaravel\TelrLaravel;
+
+$telr_laravel = new TelrLaravel();
+```
+
+Use <code>makePayment()</code> method to make payment.
+```php
+$telr_laravel->makePayment('183-487-143', 9.50, 'Cart generated by John Doe on 2023-1-16');
+```
+After calling the <code>makePayment()</code> method, then you call for <code>pay()</code> method to perform the payment.
+
+The <code>makePayment(string $order_id, float $amount, string $description)</code> method requires three parameters:
+- <code>string $order_id</code> : The order ID generated by your system.
+- <code>float $amount</code> : The amount to be paid in decimals ex: 9.50.
+- <code>string $description</code> : A short description for the payment, max length 63 characters.
+
+While the <code>pay(<array $params>)</code> method accepts one optional parameter as an array that holds the essential billing information required
+by the payment gateway. If these parameters are ignored in your system, the payment gateway page will prompt the user to
+add these information.
+
+The required information is as follows:
+- <code>fname</code> : The user first name.
+- <code>sname</code> : The user sure name.
+- <code>bill_addr1</code> : The main billing address.
+- <code>bill_phone</code> : The user phone number.
+- <code>bill_city</code> : The city, ex: Dubai.
+- <code>bill_country</code> : The country, MUST be supplied as a two character ISO 3166 country code, ex: US, GB, EG.
+- <code>email</code> : User main email.
 
 ```php
-$variable = new Melogail\TelrLaravel();
-echo $variable->echoPhrase('Hello, VendorName!');
+$billing_parameters = [
+    'fname' => $first_name,
+    'sname' => $sure_name,
+    'bill_addr1' => $address1,
+    'bill_phone' => $phone,
+    'bill_city' => $city,
+    'bill_country' => $country,
+    'email' => $email
+];
+
+$telr_laravel->makePayment('183-487-143', 9.50, 'Cart generated by John Doe on 2023-1-16')
+    ->pay($billing_parameters);
 ```
 
-## Testing
+Full code example:
+```php
+use Melogail\TelrLaravel\TelrLaravel;
 
-```bash
-composer test
+$telr_laravel = new TelrLaravel();
+
+$billing_parameters = [
+    'fname' => $first_name,
+    'sname' => $sure_name,
+    'bill_addr1' => $address1,
+    'bill_phone' => $phone,
+    'bill_city' => $city,
+    'bill_country' => $country,
+    'email' => $email
+];
+
+$telr_laravel->makePayment('183-487-143', 9.50, 'Cart generated by John Doe on 2023-1-16')->pay($billing_parameters);
 ```
+
+For more information about the billing parameters, check the platform documentation [here](https://telr.com/support/knowledge-base/hosted-payment-page-integration-guide/)
+
+## Confirm Transaction and Update Transaction Status
+After setting up payment status path pages inside your <code>config/telr-laravel.php</code> file, you need to create three different views, each for each status (Success, Decline, Cancel).
+
+Inside each view you need to call the <code>setTransactionStatus(Request $request)</code> method on the <code>Telr</code> facade to update the transaction status based on its response return.
+```php
+use Illuminate\Http\Request;
+use \Melogail\TelrLaravel\Facades\TelrLaravel;
+
+class PaymentController extends Controller {
+
+    public function success(Request $request){
+    
+        // Calling setTransactionStatus facade.
+        TelrLaravel::setTransactionStatus($request);
+        
+        return view( //... success view page);
+    }
+    
+    
+    public function decline(Request $request){
+    
+        // Calling setTransactionStatus facade.
+        TelrLaravel::setTransactionStatus($request);
+        
+        return view( //... decline view page);
+    }
+    
+    
+    public function cancel(Request $request){
+    
+        // Calling setTransactionStatus facade.
+        TelrLaravel::setTransactionStatus($request);
+        
+        return view( //... cancel view page);
+    }
+
+}
+
+```
+
 
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
-
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
-- [All Contributors](../../contributors)
+- [Mohamed Elogail](https://github.com/melogail)
 
 ## License
 

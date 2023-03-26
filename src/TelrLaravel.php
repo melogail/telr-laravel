@@ -193,7 +193,7 @@ class TelrLaravel
      */
     public function pay(array $params = [])
     {
-        // Essential parameters
+        // Essential parameters returned from config and on 'makePayment()' method.
         $parameters = [
             'ivp_method'   => $this->getIvpMethod(),
             'ivp_store'    => $this->getStoreId(),
@@ -208,11 +208,18 @@ class TelrLaravel
             'return_can'   => url($this->getReturnCan()),
         ];
 
+        if (!empty($params)) {
+            // If the user required parameters are not pre-set, the payment gateway page will ask the user to
+            // add these information.
+            $this->checkForUserRequiredParameters($params);
+
+        }
 
         // Merge user parameters
         if (!empty($params)) {
             $parameters = array_merge($parameters, $params);
         }
+
 
         // Send request and receive response
         $response = Http::asForm()->post($this->endpoint_link, $parameters);
