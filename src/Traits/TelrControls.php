@@ -821,8 +821,16 @@ trait TelrControls
 
         $transactions->update(
             [
+                'reference_code' => $result->order->ref,
+                'fname' => $result->customer->name->forenames,
+                'sname' => $result->customer->name->surname,
+                'bill_addr1' => $result->customer->address->line1 . ', ' . $result->customer->address->city . ', ' . $result->customer->address->state . ', ' . $result->customer->address->country,
+                'bill_phone' => $result->customer->address->mobile,
+                'bill_city' => $result->customer->address->city,
+                'bill_country' => $result->customer->address->state,
+                'bill_email' => $result->customer->address->email,
                 'status_code' => $result->order->status->code,
-                'status_text' => $result->order->status->text
+                'status_text' => $result->order->status->text,
             ]
         );
 

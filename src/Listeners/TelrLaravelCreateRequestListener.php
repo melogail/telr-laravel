@@ -15,6 +15,10 @@ class TelrLaravelCreateRequestListener
      */
     protected $model;
 
+
+    /**
+     * @param TelrTransaction $model
+     */
     public function __construct(TelrTransaction $model)
     {
         $this->model = $model;
@@ -27,21 +31,21 @@ class TelrLaravelCreateRequestListener
         $this->model->create([
             'cart_id'        => $event->telr->getCartId(),
             'order_id'       => $event->telr->getOrderId(),
-            'reference_code' => $event->telr->getReferenceCode(),
+            'reference_code' => $event->telr->getReferenceCode() ?? null,
             'amount'         => $event->telr->getAmount(),
             'test_mode'      => $event->telr->getTestMode(),
             'description'    => $event->telr->getDesc(),
-            'fname'          => $event->telr->getBillFname(),
-            'sname'          => $event->telr->getBillSname(),
-            'bill_addr1'     => $event->telr->getBillAddr1(),
+            'fname'          => $event->telr->getBillFname() ?? null,
+            'sname'          => $event->telr->getBillSname() ?? null,
+            'bill_addr1'     => $event->telr->getBillAddr1() ?? null,
             'bill_addr2'     => $event->telr->getBillAddr2() ?? null,
             'bill_addr3'     => $event->telr->getBillAddr3() ?? null,
-            'bill_phone'     => $event->telr->getBillPhone(),
-            'bill_city'      => $event->telr->getBillCity(),
+            'bill_phone'     => $event->telr->getBillPhone() ?? null,
+            'bill_city'      => $event->telr->getBillCity() ?? null,
             'bill_region'    => $event->telr->getBillRegion() ?? null,
-            'bill_country'   => $event->telr->getBillCountry(),
+            'bill_country'   => $event->telr->getBillCountry() ?? null,
             'bill_zip'       => $event->telr->getBillZip() ?? null,
-            'email'          => $event->telr->getEmail(),
+            'email'          => $event->telr->getEmail() ?? null,
             'vip_lang'       => $event->telr->getVipLang() ?? null,
             'vip_trantype'   => $event->telr->getVipTranType() ?? null,
             'vip_update_url' => $event->telr->getVipUpdateUrl() ?? null,
