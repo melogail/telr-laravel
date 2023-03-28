@@ -7,12 +7,9 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Melogail\TelrLaravel\TelrLaravel;
 
-
 class TelrLaravelCreateRequestEvent
 {
-
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
 
     public $telr;
 
@@ -20,5 +17,4 @@ class TelrLaravelCreateRequestEvent
     {
         $this->telr = $telr;
     }
-
 }

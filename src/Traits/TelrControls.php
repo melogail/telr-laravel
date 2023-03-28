@@ -3,7 +3,6 @@
 namespace Melogail\TelrLaravel\Traits;
 
 use GuzzleHttp\Promise\PromiseInterface;
-use http\Client;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Client\RequestException;
@@ -18,131 +17,86 @@ trait TelrControls
      * The customer's title [Optional]. if used, this should
      * be a value such as 'Mr', 'Mrs' etc. It does not refer
      * to details such as job title.
-     *
-     * @var string
      */
     private string $bill_title;
-
 
     /**
      * Forenames [Required]. The customer's forename,
      * plus any other middle names or initials they may have.
-     *
-     * @var string
      */
     private string $bill_fname = '';
-
 
     /**
      * Surename [Required]. Customer surname (also known as
      * family name).
-     *
-     * @var string
      */
     private string $bill_sname = '';
 
-
     /**
      * Address line 1 [Required].
-     *
-     * @var string
      */
     private string $bill_addr1 = '';
 
-
     /**
      * Address line 2 [Optional].
-     *
-     * @var string
      */
     private string $bill_addr2 = '';
 
-
     /**
      * Address line 3 [Optional].
-     *
-     * @var string
      */
     private string $bill_addr3 = '';
 
-
     /**
      * Customer mobile number [Required].
-     *
-     * @var string
      */
     private string $bill_phone = '';
 
-
     /**
      * City [Required].
-     *
-     * @var string
      */
     private string $bill_city = '';
 
-
     /**
      * Region/State [Optional].
-     *
-     * @var string
      */
     private string $bill_region = '';
-
 
     /**
      * Country [Required]. Must be supplied as a 2 character
      * ISO 3166 country code.
-     *
-     * @var string
      */
     private string $bill_country = '';
 
-
     /**
      * Post/Area/Zip code [Optional].
-     *
-     * @var string
      */
     private string $bill_zip = '';
 
-
     /**
      * Email address [Required].
-     *
-     * @var string
      */
     private string $email = '';
-
 
     /**
      * Payment page interface language [Optional].
      * if used, this should be a value 'en' or 'ar'
      * which are the currently supported languages.
-     *
-     * @var string
      */
     private string $ivp_lang = '';
-
 
     /**
      * Transaction type [Optional]. Configure default
      * merchant admin is used if not set.
-     *
-     * @var string
      */
     private string $ivp_trantype = '';
-
 
     /**
      * Transaction advice service type URL [Optional]. Set
      * a transaction advice service type URL on a per-transaction
      * basis.
-     *
-     * @var string
      */
     private string $ivp_update_url = '';
-
 
     /**
      * @return $this
@@ -154,7 +108,6 @@ trait TelrControls
         return $this;
     }
 
-
     /**
      * @return string
      */
@@ -162,7 +115,6 @@ trait TelrControls
     {
         return $this->ivp_method;
     }
-
 
     /**
      * @return $this
@@ -179,7 +131,6 @@ trait TelrControls
         return $this->ivp_store;
     }
 
-
     /**
      * @return $this
      */
@@ -190,7 +141,6 @@ trait TelrControls
         return $this;
     }
 
-
     /**
      * @return Repository|Application|\Illuminate\Foundation\Application|mixed|string
      */
@@ -198,7 +148,6 @@ trait TelrControls
     {
         return $this->ivp_authkey;
     }
-
 
     /**
      * @return $this
@@ -218,9 +167,7 @@ trait TelrControls
         return $this->ivp_test;
     }
 
-
     /**
-     * @param $cart
      * @return $this
      */
     public function setCartId($cart)
@@ -230,7 +177,6 @@ trait TelrControls
         return $this;
     }
 
-
     /**
      * @return string
      */
@@ -239,9 +185,7 @@ trait TelrControls
         return $this->ivp_cart;
     }
 
-
     /**
-     * @param $amount
      * @return $this
      */
     public function setAmount($amount)
@@ -251,7 +195,6 @@ trait TelrControls
         return $this;
     }
 
-
     /**
      * @return float
      */
@@ -259,8 +202,8 @@ trait TelrControls
     {
         return $this->ivp_amount;
     }
+
     /**
-     * @param $desc
      * @return $this
      */
     public function setDesc($desc)
@@ -270,7 +213,6 @@ trait TelrControls
         return $this;
     }
 
-
     /**
      * @return string
      */
@@ -278,7 +220,6 @@ trait TelrControls
     {
         return $this->ivp_desc;
     }
-
 
     /**
      * @return $this
@@ -290,7 +231,6 @@ trait TelrControls
         return $this;
     }
 
-
     /**
      * @return Repository|Application|\Illuminate\Foundation\Application|mixed|string
      */
@@ -298,7 +238,6 @@ trait TelrControls
     {
         return $this->ivp_currency;
     }
-
 
     /**
      * @return $this
@@ -310,7 +249,6 @@ trait TelrControls
         return $this;
     }
 
-
     /**
      * @return Repository|Application|\Illuminate\Foundation\Application|mixed|string
      */
@@ -318,7 +256,6 @@ trait TelrControls
     {
         return $this->return_auth;
     }
-
 
     /**
      * @return $this
@@ -330,7 +267,6 @@ trait TelrControls
         return $this;
     }
 
-
     /**
      * @return Repository|Application|\Illuminate\Foundation\Application|mixed|string
      */
@@ -338,7 +274,6 @@ trait TelrControls
     {
         return $this->return_decl;
     }
-
 
     /**
      * @return $this
@@ -350,7 +285,6 @@ trait TelrControls
         return $this;
     }
 
-
     /**
      * @return Repository|Application|\Illuminate\Foundation\Application|mixed|string
      */
@@ -359,9 +293,7 @@ trait TelrControls
         return $this->return_can;
     }
 
-
     /**
-     * @param $reference_code
      * @return $this
      */
     public function setReferenceCode($reference_code)
@@ -371,7 +303,6 @@ trait TelrControls
         return $this;
     }
 
-
     /**
      * @return string
      */
@@ -379,7 +310,6 @@ trait TelrControls
     {
         return $this->reference_code;
     }
-
 
     /**
      * Get order ID, the property value is set inside the
@@ -392,9 +322,7 @@ trait TelrControls
         return $this->order_id;
     }
 
-
     /**
-     * @param $bill_title
      * @return $this
      */
     public function setBillTitle($bill_title)
@@ -404,9 +332,7 @@ trait TelrControls
         return $this;
     }
 
-
     /**
-     * @param $bill_title
      * @return string
      */
     public function getBillTitle($bill_title)
@@ -414,9 +340,7 @@ trait TelrControls
         return $this->bill_title;
     }
 
-
     /**
-     * @param $bill_fname
      * @return $this
      */
     public function setBillFname($bill_fname)
@@ -425,7 +349,6 @@ trait TelrControls
 
         return $this;
     }
-
 
     /**
      * @param $bill_fname
@@ -436,9 +359,7 @@ trait TelrControls
         return $this->bill_fname;
     }
 
-
     /**
-     * @param $bill_sname
      * @return $this
      */
     public function setBillSname($bill_sname)
@@ -447,7 +368,6 @@ trait TelrControls
 
         return $this;
     }
-
 
     /**
      * @param $bill_sname
@@ -458,9 +378,7 @@ trait TelrControls
         return $this->bill_sname;
     }
 
-
     /**
-     * @param $bill_add1
      * @return $this
      */
     public function setBillAddr1($bill_add1)
@@ -468,9 +386,7 @@ trait TelrControls
         $this->bill_addr1 = $bill_add1;
 
         return $this;
-
     }
-
 
     /**
      * @return string
@@ -480,9 +396,7 @@ trait TelrControls
         return $this->bill_addr1;
     }
 
-
     /**
-     * @param $bill_addr2
      * @return $this
      */
     public function setBillAddr2($bill_addr2)
@@ -492,7 +406,6 @@ trait TelrControls
         return $this;
     }
 
-
     /**
      * @return string
      */
@@ -501,9 +414,7 @@ trait TelrControls
         return $this->bill_addr2;
     }
 
-
     /**
-     * @param $bill_addr3
      * @return $this
      */
     public function setBillAddr3($bill_addr3)
@@ -513,7 +424,6 @@ trait TelrControls
         return $this;
     }
 
-
     /**
      * @return string
      */
@@ -522,9 +432,7 @@ trait TelrControls
         return $this->bill_addr3;
     }
 
-
     /**
-     * @param $bill_phone
      * @return $this
      */
     public function setBillPhone($bill_phone)
@@ -534,7 +442,6 @@ trait TelrControls
         return $this;
     }
 
-
     /**
      * @return string
      */
@@ -543,9 +450,7 @@ trait TelrControls
         return $this->bill_phone;
     }
 
-
     /**
-     * @param $bill_city
      * @return $this
      */
     public function setBillCity($bill_city)
@@ -554,7 +459,6 @@ trait TelrControls
 
         return $this;
     }
-
 
     /**
      * @return string
@@ -567,140 +471,131 @@ trait TelrControls
     /**
      * Set $bill_region
      */
-
-    public function setBillRegion($bill_region){
+    public function setBillRegion($bill_region)
+    {
         $this->bill_region = $bill_region;
 
         return $this;
     }
 
-
-    /**
-     * Get $bill_region
-     */
-     public function getBillRegion(){
-        return $this->bill_region;
+     /**
+      * Get $bill_region
+      */
+     public function getBillRegion()
+     {
+         return $this->bill_region;
      }
-
 
      /**
       * Set $bill_country
       */
-
-     public function setBillCountry($bill_country){
+     public function setBillCountry($bill_country)
+     {
          $this->bill_country = $bill_country;
 
          return $this;
      }
 
-
-     /**
-      * Get $bill_country
-      */
-      public function getBillCountry(){
-         return $this->bill_country;
+      /**
+       * Get $bill_country
+       */
+      public function getBillCountry()
+      {
+          return $this->bill_country;
       }
-
 
       /**
        * Set $bill_zip
        */
-
-      public function setBillZip($bill_zip){
+      public function setBillZip($bill_zip)
+      {
           $this->bill_zip = $bill_zip;
 
           return $this;
       }
 
-
-      /**
-       * Get $bill_zip
-       */
-       public function getBillZip(){
-          return $this->bill_zip;
+       /**
+        * Get $bill_zip
+        */
+       public function getBillZip()
+       {
+           return $this->bill_zip;
        }
-
 
        /**
         * Set $email
         */
-
-       public function setEmail($email){
+       public function setEmail($email)
+       {
            $this->email = $email;
 
            return $this;
        }
 
-
-       /**
-        * Get $email
-        */
-        public function getEmail(){
-           return $this->email;
+        /**
+         * Get $email
+         */
+        public function getEmail()
+        {
+            return $this->email;
         }
-
 
         /**
          * Set $ivp_lang
          */
-
-        public function setIvpLang($ivp_lang){
+        public function setIvpLang($ivp_lang)
+        {
             $this->ivp_lang = $ivp_lang;
 
             return $this;
         }
 
-
-        /**
-         * Get $ivp_lang
-         */
-         public function getIvpLang(){
-            return $this->ivp_lang;
+         /**
+          * Get $ivp_lang
+          */
+         public function getIvpLang()
+         {
+             return $this->ivp_lang;
          }
-
-
 
          /**
           * Set $ivp_trantype
           */
-
-         public function setIvpTranType($ivp_trantype){
+         public function setIvpTranType($ivp_trantype)
+         {
              $this->ivp_trantype = $ivp_trantype;
 
              return $this;
          }
 
-
-         /**
-          * Get $ivp_trantype
-          */
-          public function getIvpTranType(){
-             return $this->ivp_trantype;
+          /**
+           * Get $ivp_trantype
+           */
+          public function getIvpTranType()
+          {
+              return $this->ivp_trantype;
           }
-
 
           /**
            * Set $ivp_update_url
            */
-
-          public function setIvpUpdateUrl($ivp_update_url){
+          public function setIvpUpdateUrl($ivp_update_url)
+          {
               $this->ivp_update_url = $ivp_update_url;
 
               return $this;
           }
 
-
-          /**
-           * Get $ivp_update_url
-           */
-           public function getIvpUpdateUrl(){
-              return $this->ivp_update_url;
+           /**
+            * Get $ivp_update_url
+            */
+           public function getIvpUpdateUrl()
+           {
+               return $this->ivp_update_url;
            }
 
     /**
      * Bootstrap essential params
-     *
-     * @return void
      */
     public function bootstrap(): void
     {
@@ -713,11 +608,9 @@ trait TelrControls
         $this->setReturnCan();
     }
 
-
     /**
      * Set transaction response
      *
-     * @param $response
      * @return TelrControls
      */
     public function setResponse($response)
@@ -730,7 +623,6 @@ trait TelrControls
         return $this;
     }
 
-
     /**
      * Return the response object
      *
@@ -738,12 +630,8 @@ trait TelrControls
      */
     public function response()
     {
-
         return $this->response;
-
     }
-
-
 
     /**
      * If payment is failed
@@ -760,12 +648,11 @@ trait TelrControls
         $response = json_decode($response);
 
         if (isset($response->error)) {
-            throw new \Exception($response->error->message . '.Note: ' . $response->error->note);
+            throw new \Exception($response->error->message.'.Note: '.$response->error->note);
         }
 
         return true;
     }
-
 
     /**
      * For checking for transaction details
@@ -790,7 +677,6 @@ trait TelrControls
         return $client;
     }
 
-
     /**
      * For making payment
      *
@@ -803,15 +689,13 @@ trait TelrControls
         $this->ivp_desc = $order_description;
         $this->ivp_cart = Uuid::uuid4()->toString();
         $this->setIvpMethod('create');
+
         return $this;
     }
-
 
     /**
      * Update transaction status based on cart-id
      *
-     * @param $ref_code
-     * @param $result
      * @return void
      */
     public function updateTransactionStatus($ref_code, $result)
@@ -822,7 +706,7 @@ trait TelrControls
                 'reference_code' => $result->order->ref,
                 'fname' => $result->order->customer->name->forenames,
                 'sname' => $result->order->customer->name->surname,
-                'bill_addr1' => $result->order->customer->address->line1 . ', ' . $result->order->customer->address->city . ', ' . $result->order->customer->address->state . ', ' . $result->order->customer->address->country,
+                'bill_addr1' => $result->order->customer->address->line1.', '.$result->order->customer->address->city.', '.$result->order->customer->address->state.', '.$result->order->customer->address->country,
                 'bill_phone' => $result->order->customer->address->mobile,
                 'bill_city' => $result->order->customer->address->city,
                 'bill_country' => $result->order->customer->address->country,
@@ -831,15 +715,13 @@ trait TelrControls
                 'status_text' => $result->order->status->text,
             ]
         );
-
     }
-
 
     /**
      * Check for essential billing parameters
      *
-     * @param array $parameters
      * @return void
+     *
      * @throws \Exception
      */
     public function checkForUserRequiredParameters(array $parameters)
@@ -851,16 +733,13 @@ trait TelrControls
             'bill_phone',
             'bill_city',
             'bill_country',
-            'email'
+            'email',
         ];
 
         foreach ($required_parameters as $parameter) {
-            if (!array_key_exists($parameter, $parameters)) {
-                throw new \Exception('[Error]: "' . $parameter . '" is required for your billing parameters.');
+            if (! array_key_exists($parameter, $parameters)) {
+                throw new \Exception('[Error]: "'.$parameter.'" is required for your billing parameters.');
             }
         }
-
     }
-
-
 }

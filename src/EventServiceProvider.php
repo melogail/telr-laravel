@@ -10,7 +10,6 @@ use Melogail\TelrLaravel\Listeners\TelrLaravelUpdateCartStatusListener;
 
 class EventServiceProvider extends ServiceProvider
 {
-
     protected $listen = [
         TelrLaravelCreateRequestEvent::class => [
             TelrLaravelCreateRequestListener::class,
@@ -19,6 +18,6 @@ class EventServiceProvider extends ServiceProvider
         TelrLaravelUpdateCartStatusEvent::class => [
             TelrLaravelUpdateCartStatusListener::class,
 
-        ]
+        ],
     ];
 }

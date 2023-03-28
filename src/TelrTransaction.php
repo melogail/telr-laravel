@@ -2,12 +2,10 @@
 
 namespace Melogail\TelrLaravel;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class TelrTransaction extends Model
 {
-
     /**
      * Targeted
      *
@@ -41,7 +39,4 @@ class TelrTransaction extends Model
         'status_text',
         'response',
     ];
-
-
-
 }
