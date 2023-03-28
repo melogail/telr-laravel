@@ -46,9 +46,9 @@ class TelrLaravelCreateRequestListener
             'bill_country'   => $event->telr->getBillCountry() ?? null,
             'bill_zip'       => $event->telr->getBillZip() ?? null,
             'email'          => $event->telr->getEmail() ?? null,
-            'vip_lang'       => $event->telr->getVipLang() ?? null,
-            'vip_trantype'   => $event->telr->getVipTranType() ?? null,
-            'vip_update_url' => $event->telr->getVipUpdateUrl() ?? null,
+            'ivp_lang'       => $event->telr->getIvpLang() ?? null,
+            'ivp_trantype'   => $event->telr->getIvpTranType() ?? null,
+            'ivp_update_url' => $event->telr->getIvpUpdateUrl() ?? null,
             'response'       => json_encode($event->telr->response()),
 
         ]);

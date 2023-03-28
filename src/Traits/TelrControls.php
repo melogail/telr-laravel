@@ -30,7 +30,7 @@ trait TelrControls
      *
      * @var string
      */
-    private string $bill_fname;
+    private string $bill_fname = '';
 
 
     /**
@@ -39,7 +39,7 @@ trait TelrControls
      *
      * @var string
      */
-    private string $bill_sname;
+    private string $bill_sname = '';
 
 
     /**
@@ -47,7 +47,7 @@ trait TelrControls
      *
      * @var string
      */
-    private string $bill_addr1;
+    private string $bill_addr1 = '';
 
 
     /**
@@ -55,7 +55,7 @@ trait TelrControls
      *
      * @var string
      */
-    private string $bill_addr2;
+    private string $bill_addr2 = '';
 
 
     /**
@@ -63,7 +63,7 @@ trait TelrControls
      *
      * @var string
      */
-    private string $bill_addr3;
+    private string $bill_addr3 = '';
 
 
     /**
@@ -71,7 +71,7 @@ trait TelrControls
      *
      * @var string
      */
-    private string $bill_phone;
+    private string $bill_phone = '';
 
 
     /**
@@ -79,7 +79,7 @@ trait TelrControls
      *
      * @var string
      */
-    private string $bill_city;
+    private string $bill_city = '';
 
 
     /**
@@ -87,7 +87,7 @@ trait TelrControls
      *
      * @var string
      */
-    private string $bill_region;
+    private string $bill_region = '';
 
 
     /**
@@ -96,7 +96,7 @@ trait TelrControls
      *
      * @var string
      */
-    private string $bill_country;
+    private string $bill_country = '';
 
 
     /**
@@ -104,7 +104,7 @@ trait TelrControls
      *
      * @var string
      */
-    private string $bill_zip;
+    private string $bill_zip = '';
 
 
     /**
@@ -112,7 +112,7 @@ trait TelrControls
      *
      * @var string
      */
-    private string $bill_email;
+    private string $email = '';
 
 
     /**
@@ -122,7 +122,7 @@ trait TelrControls
      *
      * @var string
      */
-    private string $ivp_lang;
+    private string $ivp_lang = '';
 
 
     /**
@@ -131,7 +131,7 @@ trait TelrControls
      *
      * @var string
      */
-    private string $ivp_trantype;
+    private string $ivp_trantype = '';
 
 
     /**
@@ -141,7 +141,7 @@ trait TelrControls
      *
      * @var string
      */
-    private string $ivp_update_url;
+    private string $ivp_update_url = '';
 
 
     /**
@@ -641,60 +641,60 @@ trait TelrControls
 
 
         /**
-         * Set $vip_lang
+         * Set $ivp_lang
          */
 
-        public function setVipLang($vip_lang){
-            $this->vip_lang = $vip_lang;
+        public function setIvpLang($ivp_lang){
+            $this->ivp_lang = $ivp_lang;
 
             return $this;
         }
 
 
         /**
-         * Get $vip_lang
+         * Get $ivp_lang
          */
-         public function getVipLang(){
-            return $this->vip_lang;
+         public function getIvpLang(){
+            return $this->ivp_lang;
          }
 
 
 
          /**
-          * Set $vip_trantype
+          * Set $ivp_trantype
           */
 
-         public function setVipTranType($vip_trantype){
-             $this->vip_trantype = $vip_trantype;
+         public function setIvpTranType($ivp_trantype){
+             $this->ivp_trantype = $ivp_trantype;
 
              return $this;
          }
 
 
          /**
-          * Get $vip_trantype
+          * Get $ivp_trantype
           */
-          public function getVipTranType(){
-             return $this->vip_trantype;
+          public function getIvpTranType(){
+             return $this->ivp_trantype;
           }
 
 
           /**
-           * Set $vip_update_url
+           * Set $ivp_update_url
            */
 
-          public function setVipUpdateUrl($vip_update_url){
-              $this->vip_update_url = $vip_update_url;
+          public function setIvpUpdateUrl($ivp_update_url){
+              $this->ivp_update_url = $ivp_update_url;
 
               return $this;
           }
 
 
           /**
-           * Get $vip_update_url
+           * Get $ivp_update_url
            */
-           public function getVipUpdateUrl(){
-              return $this->vip_update_url;
+           public function getIvpUpdateUrl(){
+              return $this->ivp_update_url;
            }
 
     /**
@@ -816,19 +816,17 @@ trait TelrControls
      */
     public function updateTransactionStatus($ref_code, $result)
     {
-
         $transactions = TelrTransaction::where('reference_code', $ref_code)->first();
-
         $transactions->update(
             [
                 'reference_code' => $result->order->ref,
-                'fname' => $result->customer->name->forenames,
-                'sname' => $result->customer->name->surname,
-                'bill_addr1' => $result->customer->address->line1 . ', ' . $result->customer->address->city . ', ' . $result->customer->address->state . ', ' . $result->customer->address->country,
-                'bill_phone' => $result->customer->address->mobile,
-                'bill_city' => $result->customer->address->city,
-                'bill_country' => $result->customer->address->state,
-                'bill_email' => $result->customer->address->email,
+                'fname' => $result->order->customer->name->forenames,
+                'sname' => $result->order->customer->name->surname,
+                'bill_addr1' => $result->order->customer->address->line1 . ', ' . $result->order->customer->address->city . ', ' . $result->order->customer->address->state . ', ' . $result->order->customer->address->country,
+                'bill_phone' => $result->order->customer->address->mobile,
+                'bill_city' => $result->order->customer->address->city,
+                'bill_country' => $result->order->customer->address->country,
+                'bill_email' => $result->order->customer->email,
                 'status_code' => $result->order->status->code,
                 'status_text' => $result->order->status->text,
             ]
