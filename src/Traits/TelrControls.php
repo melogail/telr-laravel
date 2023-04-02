@@ -710,7 +710,7 @@ trait TelrControls
                 'bill_phone' => $result->order->customer->address->mobile,
                 'bill_city' => $result->order->customer->address->city,
                 'bill_country' => $result->order->customer->address->country,
-                'bill_email' => $result->order->customer->email,
+                'email' => $result->order->customer->email,
                 'status_code' => $result->order->status->code,
                 'status_text' => $result->order->status->text,
             ]
