@@ -727,13 +727,13 @@ trait TelrControls
     public function checkForUserRequiredParameters(array $parameters)
     {
         $required_parameters = [
-            'fname',
-            'sname',
+            'bill_fname',
+            'bill_sname',
             'bill_addr1',
             'bill_phone',
             'bill_city',
             'bill_country',
-            'email',
+            'bill_email',
         ];
 
         foreach ($required_parameters as $parameter) {
