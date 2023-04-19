@@ -706,7 +706,7 @@ trait TelrControls
                 'reference_code' => $result->order->ref,
                 'fname' => $result->order->customer->name->forenames,
                 'sname' => $result->order->customer->name->surname,
-                'bill_addr1' => $result->order->customer->address->line1.', '.$result->order->customer->address->city.', '.$result->order->customer->address->state.', '.$result->order->customer->address->country,
+                'bill_addr1' => $result->order->customer->address->line1.', '.$result->order->customer->address->city.','.$result->order->customer->address->country,
                 'bill_phone' => $result->order->customer->address->mobile,
                 'bill_city' => $result->order->customer->address->city,
                 'bill_country' => $result->order->customer->address->country,
