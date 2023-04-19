@@ -17,7 +17,7 @@ class TelrLaravel
     /**
      * Package version
      */
-    public string $version = '1.0.0';
+    public string $version = '1.0.3';
 
     /**
      * TelrTransaction model holder
