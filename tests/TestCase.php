@@ -3,8 +3,8 @@
 namespace Melogail\TelrLaravel\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Melogail\TelrLaravel\SkeletonServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Melogail\TelrLaravel\TelrLaravelServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -20,7 +20,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            SkeletonServiceProvider::class,
+            TelrLaravelServiceProvider::class,
         ];
     }
 
