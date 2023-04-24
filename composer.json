@@ -4,7 +4,8 @@
     "keywords": [
         "melogail",
         "laravel",
-        "telr_laravel"
+        "telr_laravel",
+        "telr"
     ],
     "homepage": "https://github.com/melogail/telr-laravel",
     "license": "MIT",
@@ -15,6 +16,10 @@
             "role": "Developer"
         }
     ],
+    "support": {
+        "issues": "https://github.com/melogail/telr-laravel/issues",
+        "source": "https://github.com/melogail/telr-laravel"
+    },
     "require": {
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.5",
@@ -23,7 +28,7 @@
     },
     "require-dev": {
         "laravel/pint": "^1.0",
-        "nunomaduro/collision": "^7.9",
+        "nunomaduro/collision": "^v7.5",
         "nunomaduro/larastan": "^2.0.1",
         "orchestra/testbench": "^8.0",
         "pestphp/pest": "^2.0",
@@ -69,6 +74,6 @@
             }
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
