@@ -1,5 +1,7 @@
-# :package_description
+# Laravel Telr Payment Gateway
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/melogail/telr-laravel.svg?style=flat-square)](https://packagist.org/packages/melogail/telr-laravel)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/melogail/telr-laravel/run-tests.yml?label=tests&style=flat-square)]()
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/melogail/telr-laravel/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/melogail/telr-laravel/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/melogail/telr-laravel.svg?style=flat-square)](https://packagist.org/packages/melogail/telr-laravel)
 
