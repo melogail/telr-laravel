@@ -701,20 +701,35 @@ trait TelrControls
     public function updateTransactionStatus($ref_code, $result)
     {
         $transactions = TelrTransaction::where('reference_code', $ref_code)->first();
-        $transactions->update(
-            [
-                'reference_code' => $result->order->ref,
-                'fname' => $result->order->customer->name->forenames,
-                'sname' => $result->order->customer->name->surname,
-                'bill_addr1' => $result->order->customer->address->line1.', '.$result->order->customer->address->city.','.$result->order->customer->address->country,
-                'bill_phone' => $result->order->customer->address->mobile,
-                'bill_city' => $result->order->customer->address->city,
-                'bill_country' => $result->order->customer->address->country,
-                'email' => $result->order->customer->email,
-                'status_code' => $result->order->status->code,
-                'status_text' => $result->order->status->text,
-            ]
-        );
+
+        // Update the order based on the status of the transaction
+        $negative_action = [-1, -2, -3];
+        if (in_array($result->order->statuc->code, $negative_action)) {
+            $transactions->update(
+                [
+                    'reference_code' => $result->order->ref,
+                    'status_code' => $result->order->status->code,
+                    'status_text' => $result->order->status->text,
+                ]
+            );
+
+        } else {
+
+            $transactions->update(
+                [
+                    'reference_code' => $result->order->ref,
+                    'fname' => $result->order->customer->name->forenames,
+                    'sname' => $result->order->customer->name->surname,
+                    'bill_addr1' => $result->order->customer->address->line1.', '.$result->order->customer->address->city.','.$result->order->customer->address->country,
+                    'bill_phone' => $result->order->customer->address->mobile,
+                    'bill_city' => $result->order->customer->address->city,
+                    'bill_country' => $result->order->customer->address->country,
+                    'email' => $result->order->customer->email,
+                    'status_code' => $result->order->status->code,
+                    'status_text' => $result->order->status->text,
+                ]
+            );
+        }
     }
 
     /**
