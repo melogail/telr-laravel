@@ -704,7 +704,7 @@ trait TelrControls
 
         // Update the order based on the status of the transaction
         $negative_action = [-1, -2, -3];
-        if (in_array($result->order->statuc->code, $negative_action)) {
+        if (in_array($result->order->status->code, $negative_action)) {
             $transactions->update(
                 [
                     'reference_code' => $result->order->ref,
