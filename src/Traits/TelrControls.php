@@ -648,7 +648,7 @@ trait TelrControls
         $response = json_decode($response);
 
         if (isset($response->error)) {
-            throw new \Exception($response->error->message . '.Note: ' . $response->error->note);
+            throw new \Exception($response->error->message.'.Note: '.$response->error->note);
         }
 
         return true;
@@ -664,10 +664,10 @@ trait TelrControls
         $this->setIvpMethod('check');
 
         $params = [
-            'ivp_method'  => $this->getIvpMethod(),
-            'ivp_store'   => $this->getStoreId(),
+            'ivp_method' => $this->getIvpMethod(),
+            'ivp_store' => $this->getStoreId(),
             'ivp_authkey' => $this->getAuthkey(),
-            'order_ref'   => $reference_code,
+            'order_ref' => $reference_code,
         ];
 
         $client = Http::asForm()->post($this->endpoint_link, $params);
@@ -684,10 +684,10 @@ trait TelrControls
      */
     public function makePayment(string $order_id, float $amount, string $order_description)
     {
-        $this->order_id   = $order_id;
+        $this->order_id = $order_id;
         $this->ivp_amount = $amount;
-        $this->ivp_desc   = $order_description;
-        $this->ivp_cart   = Uuid::uuid4()->toString();
+        $this->ivp_desc = $order_description;
+        $this->ivp_cart = Uuid::uuid4()->toString();
         $this->setIvpMethod('create');
 
         return $this;
@@ -708,9 +708,9 @@ trait TelrControls
             $transactions->update(
                 [
                     'reference_code' => $result->order->ref,
-                    'email'          => $email,
-                    'status_code'    => $result->order->status->code,
-                    'status_text'    => $result->order->status->text,
+                    'email' => $email,
+                    'status_code' => $result->order->status->code,
+                    'status_text' => $result->order->status->text,
                 ]
             );
 
@@ -719,15 +719,15 @@ trait TelrControls
             $transactions->update(
                 [
                     'reference_code' => $result->order->ref,
-                    'fname'          => $result->order->customer->name->forenames,
-                    'sname'          => $result->order->customer->name->surname,
-                    'bill_addr1'     => $result->order->customer->address->line1 . ', ' . $result->order->customer->address->city . ',' . $result->order->customer->address->country,
-                    'bill_phone'     => $result->order->customer->address->mobile,
-                    'bill_city'      => $result->order->customer->address->city,
-                    'bill_country'   => $result->order->customer->address->country,
-                    'email'          => $result->order->customer->email,
-                    'status_code'    => $result->order->status->code,
-                    'status_text'    => $result->order->status->text,
+                    'fname' => $result->order->customer->name->forenames,
+                    'sname' => $result->order->customer->name->surname,
+                    'bill_addr1' => $result->order->customer->address->line1.', '.$result->order->customer->address->city.','.$result->order->customer->address->country,
+                    'bill_phone' => $result->order->customer->address->mobile,
+                    'bill_city' => $result->order->customer->address->city,
+                    'bill_country' => $result->order->customer->address->country,
+                    'email' => $result->order->customer->email,
+                    'status_code' => $result->order->status->code,
+                    'status_text' => $result->order->status->text,
                 ]
             );
         }
@@ -753,8 +753,8 @@ trait TelrControls
         ];
 
         foreach ($required_parameters as $parameter) {
-            if (!array_key_exists($parameter, $parameters)) {
-                throw new \Exception('[Error]: "' . $parameter . '" is required for your billing parameters.');
+            if (! array_key_exists($parameter, $parameters)) {
+                throw new \Exception('[Error]: "'.$parameter.'" is required for your billing parameters.');
             }
         }
     }
