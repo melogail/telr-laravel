@@ -187,6 +187,7 @@ class TelrLaravel
     {
         // Get cart ID from URL query
         $cart_id = $request->query('cart_id');
+        $email = $request->query('email');
 
         // Check for cart ID
         $cart = $this->hasCartId($cart_id);
@@ -199,7 +200,7 @@ class TelrLaravel
             // Send cart reference to server to  transaction get status.
             $result = $this->checkPayment($cart_reference);
 
-            TelrLaravelUpdateCartStatusEvent::dispatch($this, $cart_reference, json_decode($result));
+            TelrLaravelUpdateCartStatusEvent::dispatch($this, $cart_reference, $email, json_decode($result));
         }
 
         return true;
