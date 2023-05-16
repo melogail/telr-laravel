@@ -147,9 +147,9 @@ class TelrLaravel
             'ivp_amount' => $this->getAmount(),
             'ivp_desc' => $this->getDesc(),
             'ivp_currency' => $this->getCurrency(),
-            'return_auth' => url($this->getReturnAuth()).'?'.http_build_query(['cart_id' => $this->getCartId()]),
-            'return_decl' => url($this->getReturnDecl()),
-            'return_can' => url($this->getReturnCan()),
+            'return_auth' => url($this->getReturnAuth()).'?'.http_build_query(['cart_id' => $this->getCartId(), 'email' => $this->getEmail()]),
+            'return_decl' => url($this->getReturnDecl()).'?'.http_build_query(['cart_id' => $this->getCartId(), 'email' => $this->getEmail()]),
+            'return_can' => url($this->getReturnCan()).'?'.http_build_query(['cart_id' => $this->getCartId(), 'email' => $this->getEmail()]),
         ];
 
         if (! empty($params)) {
